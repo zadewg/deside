@@ -44,10 +44,44 @@ class SourceData:
 				elif key == 'Y':
 					self.Ypoints = value
 				elif key == 'CSV':
-					self.Xpoints = self.gentwodee(_fileinput(value))[0]
-					self.Ypoints = self.gentwodee(_fileinput(value))[1]
+					self.Xpoints = self._genonedee(self._fileinput(value))[0]
+					self.Ypoints = self._genonedee(self._fileinput(value))[1]
 					self.Matrix = self._fileinput(value)
 							
+			if len(locals()) > 1:
+				self.Matrix = self._gentwodee(self.Xpoints, self.Ypoints)
+		#else: raise Exception
+
+	def parse_csv(self, inputfile):  
+		matrix = []
+		f = open(inputfile, "r")
+		lines = f.read().split("\n") 
+		for line in lines:
+			if line != "": # add other needed checks to skip titles
+				array = line.split(",")
+				matrix.append(array)
+		return matrix
+
+	def _fileinput(self, FILE):
+		return self.parse_csv(FILE)
+
+	def _genonedee(self, matrix):
+		x, y = [], []
+		for i in matrix:
+			x.append((i)[0])
+			y.append((i)[1])
+		return x, y
+	
+	def _gentwodee(self, Xpoints, Ypoints):
+		w, h = 2, len(Xpoints)
+		matrix = [[0 for x in range(w)] for y in range(h)]
+		for i in range(0,h):
+			matrix[i][0] = Xpoints[i]
+			matrix[i][1] = Ypoints[i]		
+		return matrix	
+
+
+
 			if len(locals()) > 1:
 				self.Matrix = self._gentwodee(self.Xpoints, self.Ypoints)
 		#else: raise Exception

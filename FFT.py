@@ -46,7 +46,7 @@ class Fourier:
 		return err
 
 
-	def degrid(self, sig, freq=[50]):
+	def degrid(self, sig, freq=[50]): #https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.iirnotch.html
 	
 		sig_fft = self._fft(sig)	                # The FFT of the signal.
 

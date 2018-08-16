@@ -65,7 +65,28 @@ class Fourier:
 		filtered = self._ifft(bp)                       # Band filtered out.
 		return filtered
 
-
+# Required input defintions are as follows;
+# time:   Time between samples
+# band:   The bandwidth around the centerline freqency that you wish to filter
+# freq:   The centerline frequency to be filtered
+# ripple: The maximum passband ripple that is allowed in db
+# order:  The filter order.  For FIR notch filters this is best set to 2 or 3,
+#         IIR filters are best suited for high values of order.  This algorithm
+#         is hard coded to FIR filters
+# filter_type: 'butter', 'bessel', 'cheby1', 'cheby2', 'ellip'
+# data:         the data to be filtered
+#def Implement_Notch_Filter(time, band, freq, ripple, order, filter_type, data):
+#    from scipy.signal import iirfilter
+#    fs   = 1/time
+#    nyq  = fs/2.0
+#    low  = freq - band/2.0
+#    high = freq + band/2.0
+#    low  = low/nyq
+#    high = high/nyq
+#    b, a = iirfilter(order, [low, high], rp=ripple, btype='bandstop',
+#                     analog=False, ftype=filter_type)
+#    filtered_data = lfilter(b, a, data)
+#    return filtered_data
 
 	
 
